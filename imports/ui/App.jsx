@@ -12,8 +12,9 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state ={
-      projection:[]
+      lista:[]
     }
+    this.projection=null;
   }
 
   changeQuery(evt) {
@@ -29,8 +30,10 @@ export class App extends Component {
   }
 
   setProjection(projection){
-    return projection;
-
+    this.projection=projection;
+  }
+  getProjection(){
+    return this.projection
   }
 
 
@@ -47,14 +50,14 @@ export class App extends Component {
         {this.props && this.props.tweets ?
           <div className="App">
             <h2>Map of Colombia</h2>
-            <TweetsResults tweets={this.props.tweets}/>
+            <TweetsResults tweets={this.props.tweets} getProjection={this.getProjection.bind(this)}/>
             <ColombiaMap
               width="600"
               height="600"
               data={{RISARALDA:40, CALDAS:12}}
               setProjection={this.setProjection.bind(this)}
             >
-</ColombiaMap>
+            </ColombiaMap>
           </div> :
 
           <p>Enter a query</p>
