@@ -13,7 +13,6 @@ export default class Tweet extends Component {
       var img = new Image();
       img.onload = function() {
         ctx.drawImage(img, lista2[0], lista2[1]);
-    console.log(img, lista2[0]/10, lista2[1]/10);
       };
       img.src = image;
     }

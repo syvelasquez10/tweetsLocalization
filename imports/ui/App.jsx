@@ -41,7 +41,7 @@ export class App extends Component {
     console.log("render!");
     return (
       <div>
-        <input type="text" onKeyPress={this.changeQuery.bind(this)} placeholder="Query"/>
+        <input type="text" onKeyPress={this.changeQuery.bind(this)} placeholder="Find Tweets"/>
         { this.props && this.props.err ?
           <div>Error: {this.props.err}</div> :
           <span></span>
@@ -54,7 +54,7 @@ export class App extends Component {
             <ColombiaMap
               width="600"
               height="600"
-              data={{RISARALDA:40, CALDAS:12}}
+              data={{RISARALDA:0, CALDAS:0}}
               setProjection={this.setProjection.bind(this)}
             >
             </ColombiaMap>
