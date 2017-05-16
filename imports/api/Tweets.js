@@ -36,20 +36,30 @@ if (Meteor.isServer) {
         Tweets.remove({});
       }
 
-      stream = client.stream("statuses/filter", {track: query});
+
+      if (stream) {
+       console.log("Stopping previous stream");
+       stream.destroy();
+       // Remove all the tweets
+       Tweets.remove({});
+      }
+       // Colombia
+      let locations = "-79.12,-4.23,-66.85,12.59";
+      stream = client.stream("statuses/filter", {track: query, locations:locations});
       stream.on("data", Meteor.bindEnvironment(function(tweet) {
-        // console.log(tweet.text);
-        // resolve(tweet);
-        console.log(tweet.coordinates);
-        if(!tweet.coordinates===null){
-          Tweets.insert(tweet);
-        }
+       // resolve(tweet);
+       console.log(tweet.coordinates);
+       if(tweet.coordinates){
+         console.log("entro");
+         Tweets.insert(tweet);
+       }
       }));
 
       stream.on("error", function(error) {
         console.log(error);
         throw Meteor.Error(error);
       });
+
     }// twitter.stream
   }); //Meteor.methods
 }

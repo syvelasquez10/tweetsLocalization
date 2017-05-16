@@ -3,14 +3,17 @@ import {PropTypes} from "prop-types";
 import { Meteor } from "meteor/meteor";
 import { createContainer } from "meteor/react-meteor-data"
 import ColombiaMap from "./ColombiaMap.jsx";
-
 import TweetsResults from "./TweetsResults.jsx";
+import d3 from "d3";
+
 import {Tweets} from "../api/Tweets.js";
 
 export class App extends Component {
   constructor(props) {
     super(props);
-
+    this.state ={
+      projection:[]
+    }
   }
 
   changeQuery(evt) {
@@ -23,6 +26,18 @@ export class App extends Component {
     console.log(evt.target.value);
     Meteor.call("twitter.stream", evt.target.value);
 
+  }
+
+  setProjection(projection){
+    console.log(this.props.tweets);
+    var canvas = document.getElementById('canvas');
+
+    if (canvas.getContext) {
+      var ctx = canvas.getContext('2d');
+      ctx.fillStyle = 'green';
+      ctx.beginPath();
+      ctx.fillRect(10, 10, 100, 100);
+    }
   }
 
 
@@ -38,13 +53,14 @@ export class App extends Component {
         <h2>Results:</h2>
         {this.props && this.props.tweets ?
           <div className="App">
-            <TweetsResults tweets={this.props.tweets}/>
             <h2>Map of Colombia</h2>
             <ColombiaMap
               width="600"
               height="600"
               data={{RISARALDA:40, CALDAS:12}}
-            ></ColombiaMap>
+              setProjection={this.setProjection.bind(this)}
+            >
+</ColombiaMap>
           </div> :
 
           <p>Enter a query</p>

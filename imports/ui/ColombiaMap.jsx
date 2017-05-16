@@ -13,6 +13,7 @@ export default class ColombiaMap extends Component {
 	getProjection() {
 		return this.projection;
 	}
+
 	componentDidMount() {
 		var width = this.props.width || 960,
 		    height = this.props.height || 500,
@@ -32,6 +33,8 @@ export default class ColombiaMap extends Component {
 
 		var path = d3.geo.path()
 		  .projection(this.projection);
+
+		this.props.setProjection(this.projection);
 
 		// Set svg width & height
 		var svg = d3.select(this.svg)
@@ -232,7 +235,7 @@ export default class ColombiaMap extends Component {
 		  selection.exit().transition()
 		    .style('opacity', 0)
 		    .remove();
-
+			/*
 		  // Create text but set opacity to 0
 		  selection.enter().append('text')
 		    .text(function(d){return d.text;})
@@ -240,7 +243,7 @@ export default class ColombiaMap extends Component {
 		    .attr('y', function(d){return d.y;})
 		    .style('font-family', fontFamily)
 		    .style('fill', '#777')
-		    .style('opacity', 0);
+		    .style('opacity', 0);*/
 
 		  selection
 		    .style('font-family', fontFamily)
@@ -264,6 +267,7 @@ export default class ColombiaMap extends Component {
 			<div className="colombiaMap">
 				<svg
 					ref={(svg) => {this.svg = svg; }}>
+					<canvas id="canvas" width="150" height="150"></canvas>
 				</svg>
 			</div>);
 	}
