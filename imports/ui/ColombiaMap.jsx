@@ -265,9 +265,9 @@ export default class ColombiaMap extends Component {
 	render() {
 		return (
 			<div className="colombiaMap">
+				<canvas id="canvas" width="150" height="150" className="overlay"></canvas>
 				<svg
 					ref={(svg) => {this.svg = svg; }}>
-					<canvas id="canvas" width="150" height="150" ></canvas>
 				</svg>
 			</div>);
 	}

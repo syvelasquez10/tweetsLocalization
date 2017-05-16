@@ -27,3 +27,8 @@ text.big-text{
 .effect-layer text, text.dummy-text{
   font-size: 12px;
 }
+
+.overlay {
+  position: absolute;
+  z-index: 10;
+}

@@ -29,15 +29,8 @@ export class App extends Component {
   }
 
   setProjection(projection){
-    console.log(this.props.tweets);
-    var canvas = document.getElementById('canvas');
+    return projection;
 
-    if (canvas.getContext) {
-      var ctx = canvas.getContext('2d');
-      ctx.fillStyle = 'green';
-      ctx.beginPath();
-      ctx.fillRect(10, 10, 100, 100);
-    }
   }
 
 
@@ -54,6 +47,7 @@ export class App extends Component {
         {this.props && this.props.tweets ?
           <div className="App">
             <h2>Map of Colombia</h2>
+            <TweetsResults tweets={this.props.tweets}/>
             <ColombiaMap
               width="600"
               height="600"
